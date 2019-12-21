@@ -13,10 +13,13 @@ let endTime;
 let boxOneClicked;
 let boxTwoClicked;
 
+var clickSound;
+
 function preload() {
     startImg = loadImage("pics/start.jpg");
     endImg = loadImage("pics/end.jpg");
     restartImg = loadImage("pics/restart.png");
+    clickSound = loadSound("sounds/click.mp3");
 }
 
 function setup() {
@@ -29,7 +32,6 @@ function setup() {
   box[1] = new Target(924, 300, endImg);
   box[2] = new Target(380, 618, restartImg);
   box[2].setLength(20);
-  textSize(24);
   textFont("Source Code Pro");
 }
 
@@ -42,11 +44,13 @@ function draw() {
   box[2].show();
 
   if(boxOneClicked && mouseMoved() && !boxTwoClicked) {
-      tracer[tracerIndex] = createVector(mouseX, mouseY);
-      tracerIndex++;
-      for(var i = 0; i < tracerIndex; i++) {
-          fill(255, 255, 0);
-          ellipse(tracer[i].x, tracer[i].y, 5, 5);
-      }
+    tracer[tracerIndex] = createVector(mouseX, mouseY);
+    tracerIndex++;
   }
+
+  for(var i = 0; i < tracerIndex; i++) {
+      fill(255, 255, 0);
+      ellipse(tracer[i].x, tracer[i].y, 5, 5);
+  }
+
 }
